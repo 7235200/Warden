@@ -3,7 +3,8 @@ require 'test_helper'
 class TransactionTest < ActiveSupport::TestCase
  def setup
    @user = users(:Dima)
-   @transaction = Transaction.new(user_id:@user.id, name:"MyName", price:"3.43", kind:"MyKind")
+   @kind = kinds(:internet)
+   @transaction = Transaction.new(user_id:@user.id, name:"MyName", price:"3.43", kind_id:@kind.id)
  end
 
   test "is valid?" do
@@ -26,6 +27,16 @@ class TransactionTest < ActiveSupport::TestCase
 
  test "order should be most recent first" do
    assert_equal Transaction.first, transactions(:most_recent)
+ end
+
+
+ test "kind id should be present" do
+   @transaction.kind_id = nil
+   assert_not @transaction.valid?
+ end
+ test "user id should be present" do
+   @transaction.user_id = nil
+   assert_not @transaction.valid?
  end
 
 end

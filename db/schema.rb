@@ -11,20 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202123354) do
+ActiveRecord::Schema.define(version: 20141202134728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "kinds", force: true do |t|
     t.string   "name"
-    t.integer  "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "kinds", ["transaction_id", "created_at"], name: "index_kinds_on_transaction_id_and_created_at", using: :btree
-  add_index "kinds", ["transaction_id"], name: "index_kinds_on_transaction_id", using: :btree
 
   create_table "test", force: true do |t|
     t.string   "test"
@@ -39,8 +35,10 @@ ActiveRecord::Schema.define(version: 20141202123354) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "kind_id"
   end
 
+  add_index "transactions", ["kind_id"], name: "index_transactions_on_kind_id", using: :btree
   add_index "transactions", ["user_id", "created_at"], name: "index_transactions_on_user_id_and_created_at", using: :btree
   add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
