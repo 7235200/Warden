@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202114304) do
+ActiveRecord::Schema.define(version: 20141202123354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20141202114304) do
 
   add_index "kinds", ["transaction_id", "created_at"], name: "index_kinds_on_transaction_id_and_created_at", using: :btree
   add_index "kinds", ["transaction_id"], name: "index_kinds_on_transaction_id", using: :btree
+
+  create_table "test", force: true do |t|
+    t.string   "test"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "transactions", force: true do |t|
     t.string   "name"
@@ -44,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141202114304) do
     t.decimal  "balance"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
