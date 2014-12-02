@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+Dima:
+  name: Dima
+  email: dima@mail.ru
+  balance: 9.99
+
+Masha:
+  name: Masha
+  email: masha@mail.ru
+  balance: 9.99
+

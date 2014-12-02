@@ -1,28 +1,31 @@
 require 'test_helper'
 
 class TransactionTest < ActiveSupport::TestCase
-  def setup
-    @transaction = Transaction.new(user_id:"1", name:"Playstation4", price:"195.34", type:"Other")
-  end
+ def setup
+   @user = users(:Dima)
+   @transaction = Transaction.new(user_id:@user.id, name:"MyName", price:"3.43", kind:"MyKind")
+ end
 
-  test "should be valid" do
+  test "is valid?" do
     assert @transaction.valid?
   end
+
   test "name should be present" do
     @transaction.name = " "
     assert_not @transaction.valid?
   end
-  test "price should be present numeric and only-2symbols-after-point" do
-    @transaction.price = " " || @transaction.price = "number" || @transaction.price = "3.333"
-    assert_not @transaction.valid?
-  end
-  test "type should be present" do
-    @transaction.type = " "
-    assert_not @transaction.valid?
-  end
-  test "name should not be too long" do
-    @transaction.name = "a" * 51
-    assert_not @transaction.valid?
-  end
+ test "name should not be more than 50char" do
+   @transaction.name = "a"*51
+   assert_not @transaction.valid?
+ end
+
+ test "price should be present, numeric and only2-symbols-after-point" do
+   @transaction.price = " " || @transaction.price = "String" || @transaction.price = "3.433"
+   assert_not @transaction.valid?
+ end
+
+ test "order should be most recent first" do
+   assert_equal Transaction.first, transactions(:most_recent)
+ end
 
 end

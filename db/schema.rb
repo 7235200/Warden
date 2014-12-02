@@ -11,25 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202074251) do
+ActiveRecord::Schema.define(version: 20141202114304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "transactions", force: true do |t|
-    t.integer  "user_id"
+  create_table "kinds", force: true do |t|
     t.string   "name"
-    t.decimal  "price"
-    t.string   "type"
+    t.integer  "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  add_index "kinds", ["transaction_id", "created_at"], name: "index_kinds_on_transaction_id_and_created_at", using: :btree
+  add_index "kinds", ["transaction_id"], name: "index_kinds_on_transaction_id", using: :btree
+
+  create_table "transactions", force: true do |t|
     t.string   "name"
-    t.string   "email"
+    t.decimal  "price"
+    t.string   "kind"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "transactions", ["user_id", "created_at"], name: "index_transactions_on_user_id_and_created_at", using: :btree
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.decimal  "balance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

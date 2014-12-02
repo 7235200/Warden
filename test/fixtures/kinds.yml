@@ -2,21 +2,17 @@
 
 internet:
   name: "internet"
-  price: 9.99
   created_at: <%= 10.minutes.ago %>
 
 phone:
   name: "phone"
-  price: 9.99
   created_at: <%= 3.years.ago %>
 
 current:
   name: "current"
-  price: 9.99
   created_at: <%= 2.hours.ago %>
 
 most_recent:
   name: "Writing a short test"
-  price: 9.99
   created_at: <%= Time.zone.now %>
 
