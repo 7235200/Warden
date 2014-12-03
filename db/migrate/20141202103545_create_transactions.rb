@@ -5,6 +5,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.decimal :price
       t.string :kind
       t.references :user, index: true
+      t.references :kind, index: true
 
       t.timestamps
     end
