@@ -4,9 +4,16 @@ Dima:
   name: Dima
   email: dima@mail.ru
   balance: 9.99
+  password_digest: <%= User.digest('password') %>
 
 Masha:
   name: Masha
   email: masha@mail.ru
   balance: 9.99
+  password_digest: <%= User.digest('password') %>
+
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>
 
