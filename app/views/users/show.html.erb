@@ -1,10 +1,13 @@
 <%= content_for :content do %>
-<div class="block">
  <h1>show profile</h1>
- <ul>
-   <li> <%= @user.name %> </li>
-   <li> <%= @user.email %> </li>
-   <li> <%= @user.balance %> </li>
- </ul>
-</div>
+
+    <%= form_for(@user) do |f| %>
+        <%= f.label :name %>
+        <%= @user.name %>
+        <%= f.label :email %>
+        <%= @user.email %>
+        <%= f.label :balance %>
+        <%= @user.balance %>
+    <% end %>
+    <%= gravatar_for @user %>
 <% end %>

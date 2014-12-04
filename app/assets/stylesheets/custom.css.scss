@@ -254,14 +254,17 @@ input {
   -moz-border-radius:10px;
   -khtml-border-radius:10px;
   margin-left:2rem;
-  padding:1rem 4rem;
+  padding:1rem 2rem;
 }
 
 .balance {
-  font-size: 5rem;
+  font-size: 7rem;
   color: #a06b53;
   padding:1.5rem;
 }
 .gravatar_edit{
   padding:3rem 0;
+}
+.fa-ruble{
+  color:$gray-medium-light;
 }

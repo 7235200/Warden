@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+  # skip_before_filter :verify_authenticity_token, :only => [:add_money]
   def new
     @user = User.new()
   end
@@ -36,6 +37,7 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
 
   private
 
