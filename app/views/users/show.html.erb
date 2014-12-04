@@ -1,6 +1,10 @@
+<%= content_for :content do %>
 <div class="block">
+ <h1>show profile</h1>
  <ul>
    <li> <%= @user.name %> </li>
    <li> <%= @user.email %> </li>
+   <li> <%= @user.balance %> </li>
  </ul>
 </div>
+<% end %>

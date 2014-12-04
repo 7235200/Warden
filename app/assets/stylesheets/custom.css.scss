@@ -70,9 +70,8 @@ header {color: $gray-light;}
     }
   }
  header h1{
-   text-align:center;
    font-size: 6rem;
-   padding:2rem;
+   padding:0 4rem;
  }
  header small{float:right}
 
@@ -173,7 +172,6 @@ input {
 }
 
 /* Users index */
-
 .users {
   list-style: none;
   margin: 0;
@@ -263,4 +261,7 @@ input {
   font-size: 5rem;
   color: #a06b53;
   padding:1.5rem;
+}
+.gravatar_edit{
+  padding:3rem 0;
 }
