@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    @user = User.new()
   end
 
   def show
@@ -13,7 +13,8 @@ class UsersController < ApplicationController
       # Handle a successful save.
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      # redirect_to @user
+      redirect_to root_url
     else
       render 'new'
     end
@@ -22,6 +23,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :balance)
   end
 end

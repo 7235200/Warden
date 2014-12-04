@@ -1,6 +1,31 @@
-<h1>Warden App</h1>
-<p>
-  This is the home page for the Warden, please
-</p>
-<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+<% if logged_in? %>
+    <div class="col-md-3 content">
+      <h1><%= current_user.name %><span class="balance"><%= current_user.balance %></span></h1>
+      <ul class="nav nav-pills nav-stacked">
+        <li> <%= link_to "Home", root_path %></li>
+        <li> <%= link_to "Edit profile", "#"%></li>
+        <li> <%= link_to "Log out", logout_path, method: "delete" %></li>
+        <li> <%= link_to "Refill", "#"%></li>
+        <li> <%= link_to "Show last refills", "#"%></li>
+      </ul>
+    </div>
+    <div class="col-md-8 content">
+    </div>
 
+
+
+
+
+
+<% else %>
+    <div class="welcome-message">
+      <h1>.hello</h1>
+    </div>
+    <div class="welcome">
+    <p> Please
+      <button class="btn btn-md btn-primary"><%= link_to "Log in", login_path %></button>
+      or
+      <button class="btn btn-md btn-primary"><%= link_to "Sign up", signup_path %></button>
+      if you'r new guy
+    </div>
+<% end %>

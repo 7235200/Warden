@@ -3,13 +3,9 @@
 
 /* mixins, variables, etc. */
 
-$gray-medium-light: #eaeaea;
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
+$gray-medium-light: #4f4f4f;
+$white: #ffffff;
+$black: #333333;
 
 /* universal */
 
@@ -18,7 +14,8 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 3rem;
+  background: url('/assets/footer_lodyas.png');
 }
 
 section {
@@ -45,8 +42,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
+  margin-bottom: 10px;
+  color: #787878;
 }
 
 h2 {
@@ -61,41 +58,31 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  letter-spacing: 2px;
 }
-
 
 /* header */
-
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
-}
-
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  a {
+header {color: $gray-light;}
+ a {
     color: $gray;
     &:hover {
       color: $gray-darker;
     }
   }
+ header h1{
+   text-align:center;
+   font-size: 6rem;
+   padding:2rem;
+ }
+ header small{float:right}
+
+
+/* footer */
+
+footer {
+  color: $gray-light;
   small {
-    float: left;
+    float:left;
   }
   ul {
     float: right;
@@ -110,11 +97,11 @@ footer {
 /* miscellaneous */
 
 .debug_dump {
+  visibility: hidden;
   clear: both;
   float: left;
   width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
+  margin-top: 245px;
 }
 
 /* sidebar */
@@ -145,22 +132,11 @@ aside {
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-
-.gravatar_edit {
-  margin-top: 15px;
-}
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
-  @include box_sizing;
 }
 
 input {
@@ -206,4 +182,85 @@ input {
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+}
+
+// welcome
+.welcome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-80%, -50%);
+  transform: translate(-80%, -50%);
+  width:40rem;
+  padding:3rem 5rem;
+  background-color:$white;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  -khtml-border-radius:10px;
+
+  a {
+    color: $white;
+    font-weight: 100;
+    font-size: 1.8rem;
+    &:hover {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+  p {
+    padding-top:2rem;
+    color: $black;
+    font-size: 2rem;
+    font-weight: 100;
+    a.login {
+      color: $black;
+      font-weight: 200;
+      font-size: 2rem;
+      &:hover {
+        color: $black;
+        text-decoration: none;
+      }
+    }
+  }
+  h1 {
+    color:$black;
+    padding-bottom:3rem;
+  }
+}
+
+.login {
+  h1{
+    font-size: 10rem;
+    padding:5rem;
+    color:$gray-medium-light;
+  }
+}
+
+.welcome-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(20%, -55%);
+  transform: translate(20%, -55%);
+  width:50rem;
+  padding:3rem 5rem;
+  h1{
+    color:$gray-medium-light;
+    font-size: 10rem;
+  }
+}
+
+.content {
+  background-color: $white;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  -khtml-border-radius:10px;
+  margin-left:2rem;
+  padding:1rem 4rem;
+}
+
+.balance {
+  font-size: 5rem;
+  color: #a06b53;
+  padding:1.5rem;
 }
