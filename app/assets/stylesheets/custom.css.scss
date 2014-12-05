@@ -26,13 +26,6 @@ textarea {
   resize: vertical;
 }
 
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
-}
-
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,77 +51,19 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
-  letter-spacing: 2px;
+  padding-top:1rem;
+//  letter-spacing: 2px;
 }
 
-/* header */
-header {color: $gray-light;}
- a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
- header h1{
-   font-size: 6rem;
-   padding:0 4rem;
- }
- header small{float:right}
-
-
-/* footer */
-
-footer {
-  color: $gray-light;
-  small {
-    float:left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
 
 /* miscellaneous */
 
 .debug_dump {
 //  visibility: hidden;
-  clear: both;
+//  clear: both;
   float: left;
   width: 100%;
   margin-top: 245px;
-}
-
-/* sidebar */
-
-aside {
-  section.user_info {
-    margin-top: 20px;
-  }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
 }
 
 /* forms */
@@ -171,21 +106,7 @@ input {
   margin-left: 0;
 }
 
-.recharge {
-  display:inline;
-}
 
-
-/* Users index */
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
-}
 
 // welcome
 .welcome {
@@ -200,45 +121,7 @@ input {
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   -khtml-border-radius:10px;
-
-  a {
-    color: $white;
-    font-weight: 100;
-    font-size: 1.8rem;
-    &:hover {
-      color: $white;
-      text-decoration: none;
-    }
-  }
-  p {
-    padding-top:2rem;
-    color: $black;
-    font-size: 2rem;
-    font-weight: 100;
-    a.login {
-      color: $black;
-      font-weight: 200;
-      font-size: 2rem;
-      &:hover {
-        color: $black;
-        text-decoration: none;
-      }
-    }
-  }
-  h1 {
-    color:$black;
-    padding-bottom:3rem;
-  }
 }
-
-.login {
-  h1{
-    font-size: 10rem;
-    padding:5rem;
-    color:$gray-medium-light;
-  }
-}
-
 .welcome-message {
   position: absolute;
   top: 50%;
@@ -253,6 +136,13 @@ input {
   }
 }
 
+
+// Main layouting
+
+.container{
+  background-color:$white;
+  padding:3rem;
+}
 .menu {
   background-color: rgba(94, 141, 159, 0.03);
   -webkit-border-radius:10px;
@@ -261,7 +151,6 @@ input {
   margin-left:2rem;
   padding:1rem 2rem;
 }
-
 .content{
   padding:1rem 5rem;
 }
@@ -274,17 +163,6 @@ input {
 .gravatar_edit{
   padding:3rem 0;
 }
-.fa-ruble{
-  color:$gray-medium-light;
-}
 
-.container{
-  background-color:$white;
-  padding:3rem;
-}
 
-.message{
-  width:100%;
-  text-align: center;
-  margin:0 auto 3rem;
-}
+
