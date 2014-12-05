@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
+  validates :balance, presence: true,
+            :numericality => { greater_than:0 },
+            :format => { :with => /\A\d{1,4}(\.\d{0,2})?\z/ }
 
   # Returns the hash digest of the given string (for user_login test)
   def User.digest(string)

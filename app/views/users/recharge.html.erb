@@ -1,0 +1,10 @@
+<%= content_for :content do %>
+<div class="col-md-5">
+<h1>Recharge</h1>
+<%= form_for @user, :url => recharge_path, :html => {:method => :post} do |f| %>
+<%= render 'shared/error_messages' %>
+<%= f.text_field :balance, class: 'form-control', :value => 0 %>
+<%= f.submit "Add money", class: 'btn btn-md btn-primary' %>
+<% end %>
+</div>
+<% end %>

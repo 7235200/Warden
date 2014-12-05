@@ -96,7 +96,7 @@ footer {
 /* miscellaneous */
 
 .debug_dump {
-  visibility: hidden;
+//  visibility: hidden;
   clear: both;
   float: left;
   width: 100%;
@@ -170,6 +170,11 @@ input {
   width: auto;
   margin-left: 0;
 }
+
+.recharge {
+  display:inline;
+}
+
 
 /* Users index */
 .users {
@@ -248,8 +253,8 @@ input {
   }
 }
 
-.content {
-  background-color: $white;
+.menu {
+  background-color: rgba(94, 141, 159, 0.03);
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   -khtml-border-radius:10px;
@@ -257,8 +262,12 @@ input {
   padding:1rem 2rem;
 }
 
+.content{
+  padding:1rem 5rem;
+}
+
 .balance {
-  font-size: 7rem;
+  font-size: 4rem;
   color: #a06b53;
   padding:1.5rem;
 }
@@ -267,4 +276,15 @@ input {
 }
 .fa-ruble{
   color:$gray-medium-light;
+}
+
+.container{
+  background-color:$white;
+  padding:3rem;
+}
+
+.message{
+  width:100%;
+  text-align: center;
+  margin:0 auto 3rem;
 }

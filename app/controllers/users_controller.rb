@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   # skip_before_filter :verify_authenticity_token, :only => [:add_money]
+
   def new
     @user = User.new()
   end
@@ -38,6 +39,23 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def recharge
+    @user = current_user
+  end
+
+  def add_money
+    @user = current_user
+    was = @user.balance
+    if  @user.update_attributes(balance: params[:user][:balance])
+        @user.update_attributes(balance: @user.balance + was)
+        flash[:success] = "Balance recharged"
+        redirect_to root_url
+    else
+        @user.balance = was
+        render 'recharge'
+    end
+  end
 
   private
 
