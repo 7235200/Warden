@@ -1,0 +1,35 @@
+<%= content_for :content do %>
+    <h3>Transactions</h3>
+    <%= render 'transactions/new' %>
+
+    <%= will_paginate @transaction %>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Created_add</th>
+        <th></th>
+      </tr>
+
+      <% @transaction.each do |transaction| %>
+          <tr>
+            <td><%= transaction.name %></td>
+            <td>
+              <%= if transaction.kind
+                    transaction.kind.name
+                  else
+                    "Category was deleted"
+                  end %>
+            </td>
+            <td> - <%= transaction.price %></td>
+            <td><%= transaction.created_at %></td>
+            <td><%= link_to "delete", transaction, method: :delete,
+                    data: { confirm: "You sure?" } %></td>
+          </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @transaction %>
+
+
+<% end %>

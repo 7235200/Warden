@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'signup'  => 'users#new'
   resources :users
   resources :kinds
+  resources :transactions
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

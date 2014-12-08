@@ -1,26 +1,33 @@
 <%= content_for :content do %>
-<div class="col-md-6">
-<h1>edit profile</h1>
+<h3>Edit profile</h3>
 <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages' %>
+        <div class="gravatar_edit">
+          <ul class="nav nav-pills">
+          <li><%= gravatar_for @user %></li>
+          <li><a href="http://gravatar.com/emails" target=_blank>Change avatar</a></li>
+          </ul>
+        </div>
 
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label :email %>
-        <%= f.text_field :email, class: 'form-control' %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control' %>
+        <ul class="nav nav-pills">
+       <li> <%= f.label :name, class: 'form-control'%></li>
+          <li> <%= f.text_field :name, class: 'form-control' %></li>
 
-         <%= f.label :password_confirmation, "Confirmation" %>
-         <%= f.password_field :password_confirmation, class: 'form-control' %>
+              <li><%= f.label :email, class: 'form-control' %></li>
+              <li><%= f.text_field :email, class: 'form-control' %></li>
+                    </ul>
+                    <ul class="nav nav-pills">
 
+                  <li><%= f.label :password, class: 'form-control' %></li>
+                  <li><%= f.password_field :password, class: 'form-control' %></li>
+
+                      <li> <%= f.label :password_confirmation, class: 'form-control' %></li>
+                      <li> <%= f.password_field :password_confirmation, class: 'form-control' %></li>
+                           </ul>
+                            <ul class="nav nav-pills">
          <%= f.submit "Save changes", class: "btn btn-primary" %>
+</ul>
          <% end %>
-         <div class="gravatar_edit">
-              <%= gravatar_for @user %>
-              <a href="http://gravatar.com/emails" target=_blank>Change avatar</a>
-         </div>
-</div>
 <% end %>

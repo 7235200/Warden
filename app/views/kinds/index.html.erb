@@ -1,6 +1,6 @@
 <%= content_for :content do %>
-<h1>Transaction categories</h1>
-<%= link_to "Add new", new_kind_path %>
+<h3>Categories</h3>
+    <%= render 'kinds/new' %>
     <table class="table">
       <tr>
         <th>Id</th>
@@ -9,7 +9,7 @@
         <th></th>
       </tr>
 
-      <% @kinds.each do |kind| %>
+      <% @kind.each do |kind| %>
 
           <tr>
             <td><%= kind.id %></td>

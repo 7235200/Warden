@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
   validates :balance, presence: true,
             :numericality => { greater_than:0 },
-            :format => { :with => /\A\d{1,4}(\.\d{0,2})?\z/ }
+            :format => { :with => /\A\d{1,8}(\.\d{0,2})?\z/ }
 
   # Returns the hash digest of the given string (for user_login test)
   def User.digest(string)
