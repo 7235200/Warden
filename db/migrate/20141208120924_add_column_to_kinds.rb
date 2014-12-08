@@ -1,5 +1,5 @@
 class AddColumnToKinds < ActiveRecord::Migration
   def change
-    add_column :kinds, :user\q_id, :integer
+    add_column :kinds, :user_id, :integer
   end
 end
