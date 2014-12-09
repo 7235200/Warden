@@ -1,8 +1,8 @@
 
 <ul class="nav nav-pills nav-stacked">
-  <li> <%= link_to '<i class="fa fa-user fa-fw"></i> Edit profile'.html_safe, edit_user_path(current_user) %></li>
+  <li> <%= link_to '<i class="fa fa-user fa-fw"></i> &nbsp;Edit profile'.html_safe, edit_user_path(current_user) %></li>
   <li> <%= link_to '<i class="fa fa-home fa-fw"></i> &nbsp;Dashboard'.html_safe, root_url%></li>
-  <li> <%= link_to '<i class="fa fa-home fa-fw"></i> &nbsp;Transactions'.html_safe, transactions_path%></li>
+  <li> <%= link_to '<i class="fa fa-rocket fa-fw"></i> &nbsp;Transactions'.html_safe, transactions_path%></li>
   <li> <%= link_to '<i class="fa fa-external-link fa-fw"></i> &nbsp;Categories'.html_safe, kinds_path %></li>
   <li> <%= link_to '<i class="fa fa-bar-chart fa-fw"></i> &nbsp;Reports'.html_safe, '#' %></li>
   <li> <%= link_to '<i class="fa fa-gears fa-fw"></i> &nbsp;Log out'.html_safe, logout_path, method: "delete" %></li>

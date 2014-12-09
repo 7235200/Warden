@@ -3,7 +3,6 @@
     <%= render 'kinds/new' %>
     <table class="table">
       <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Created_add</th>
         <th></th>
@@ -12,9 +11,9 @@
       <% @kind.each do |kind| %>
 
           <tr>
-            <td><%= kind.id %></td>
             <td><%= kind.name %></td>
             <td><%= kind.created_at %></td>
+            <td><%= link_to "edit", edit_kind_path(kind) %></td>
             <td><%= link_to "delete", kind, method: :delete,
                     data: { confirm: "You sure?" } %></td>
           </tr>

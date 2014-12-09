@@ -22,6 +22,22 @@ class KindsController < ApplicationController
     @kind = Kind.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 15).order('id DESC')
   end
 
+  def edit
+    @user = current_user
+    @kind = Kind.find(params[:id])
+  end
+  def update
+    @user = current_user
+    @kind = Kind.find(params[:id])
+    if @kind.update_attributes(kind_params)
+      # Handle a successful update.
+      flash[:success] = "Category updated"
+      redirect_to kinds_url
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @kind = Kind.find(params[:id]).destroy
     flash[:success] = "Category deleted successfully"
@@ -37,4 +53,7 @@ class KindsController < ApplicationController
       redirect_to login_url
     end
   end
+    def kind_params
+      params.require(:kind).permit(:name)
+    end
 end

@@ -33,6 +33,26 @@ class TransactionsController < ApplicationController
     end
    end
 
+  def edit
+    @user = current_user
+    @transaction = Transaction.find(params[:id])
+  end
+  def update
+    @user = current_user
+    @balance_was = @user.balance
+    @transaction = Transaction.find(params[:id])
+    @transaction_price_was = @transaction.price
+    if @transaction.update_attributes(transaction_params)
+      @user.update_attributes(balance: @balance_was + @transaction_price_was - params[:transaction][:price].to_f )
+      # Handle a successful update.
+      flash[:success] = "Transaction updated"
+      redirect_to transactions_url
+    else
+      render 'edit'
+    end
+
+  end
+
   def destroy
     @transaction = Transaction.find(params[:id])
     user = current_user
@@ -57,5 +77,9 @@ class TransactionsController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def transaction_params
+      params.require(:transaction).permit(:name, :price, :kind, :kind_id)
   end
 end

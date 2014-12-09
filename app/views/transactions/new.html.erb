@@ -1,15 +1,13 @@
-<%= content_for :content do %>
+
     <%= form_for(@transaction) do |f| %>
         <%= render 'shared/transaction_error_messages' %>
-{EQ
         <ul class="nav nav-pills">
           <li><%= f.label :name, class: 'form-control' %></li>
                 <li><%= f.text_field :name, class: 'form-control' %></li>
                       <li><%= f.label :price, class: 'form-control' %></li>
                             <li><%= f.text_field :price, class: 'form-control' %></li>
-                                  <li><%= f.select(:kind_id, Kind.all.collect {|p| [ p.name, p.id ] },{},{:class => 'form-control' })%></li>
+                                  <li><%= f.select(:kind_id, Kind.where(:user_id => @user.id).collect {|p| [ p.name, p.id ] },{},{:class => 'form-control' })%></li>
                                   <li><%= f.submit "Add", class: "btn btn-primary" %></li>
                                         </ul>
 
                                   <% end %>
-<% end %>

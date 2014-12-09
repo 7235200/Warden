@@ -1,0 +1,8 @@
+<%= content_for :content do %>
+    <h3>Edit category</h3>
+    <%= form_for(@kind) do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+            <%= f.submit "Update category", class: "btn btn-primary" %>
+            <% end %>
+        <% end %>
