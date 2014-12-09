@@ -53,7 +53,7 @@ class UsersController < ApplicationController
         redirect_to root_url
     else
         @user.balance = was
-        render 'recharge'
+        render 'users/_recharge'
     end
   end
 

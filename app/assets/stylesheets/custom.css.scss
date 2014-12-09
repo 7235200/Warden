@@ -141,6 +141,10 @@ input {
 
 .container{
   background-color:$white;
+  padding:1.5rem;
+}
+h3 {
+  padding:0 0 1rem;
 }
 .menu {
 //  background-color: rgba(94, 141, 159, 0.03);
@@ -152,11 +156,14 @@ input {
 .content{
   padding:1rem 5rem;
 }
-
+.recharge{
+  list-style-type:none;
+  padding:0;
+}
 .balance {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #a06b53;
-  padding:1.5rem;
+  padding:0;
 }
 .gravatar_edit{
   padding:3rem 0;

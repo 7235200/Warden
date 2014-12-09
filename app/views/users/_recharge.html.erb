@@ -1,12 +1,11 @@
-<%= content_for :content do %>
+
 
 <h3>Recharge</h3>
 <%= form_for @user, :url => recharge_path, :html => {:method => :post} do |f| %>
 <%= render 'shared/error_messages' %>
-<ul class="nav nav-pills">
-<li><%= f.label :balance, class: 'form-control', :value => 0 %></li>
+<ul class="recharge">
+<li> <%= f.label :balance,  current_user.balance, class: 'balance' %></li>
 <li><%= f.text_field :balance, class: 'form-control', :value => 0 %></li>
 <li><%= f.submit "Add money", class: 'btn btn-md btn-primary' %></li>
 </ul>
       <% end %>
-<% end %>

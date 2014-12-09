@@ -5,8 +5,8 @@ class KindsController < ApplicationController
   end
 
   def create
-    user = current_user
-    @kind = Kind.new(:name=>params[:kind][:name], :user_id=>user.id)
+    @user = current_user
+    @kind = Kind.new(:name=>params[:kind][:name], :user_id=>@user.id)
     if @kind.save
       # Handle a successful save.
       flash[:success] = "New category added"

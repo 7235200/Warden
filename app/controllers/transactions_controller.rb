@@ -13,14 +13,14 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    user = current_user
-    was = user.balance
+    @user = current_user
+    @was = @user.balance
     @transaction = Transaction.new(:name=>params[:transaction][:name], :price=>params[:transaction][:price],
-                                   :kind_id=>params[:transaction][:kind_id], :user_id=>user.id)
+                                   :kind_id=>params[:transaction][:kind_id], :user_id=>@user.id)
 
-    if was>params[:transaction][:price].to_f
+    if @was>params[:transaction][:price].to_f
         if @transaction.save
-          user.update_attributes(balance: was - params[:transaction][:price].to_f)
+          @user.update_attributes(balance: @was - params[:transaction][:price].to_f)
           # Handle a successful save.
           flash[:success] = "New category added"
           redirect_to transactions_url
