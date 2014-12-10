@@ -9,7 +9,6 @@ class TransactionsController < ApplicationController
     @user = current_user
     @new = Transaction.new()
     @transaction = Transaction.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 15).order('id DESC')
-
   end
 
   def create
@@ -50,7 +49,6 @@ class TransactionsController < ApplicationController
     else
       render 'edit'
     end
-
   end
 
   def destroy
@@ -62,6 +60,23 @@ class TransactionsController < ApplicationController
     flash[:success] = "Transaction deleted successfully"
     redirect_to transactions_url
   end
+
+  def data_filer_show
+    start_date = DateTime.parse(params['start'])
+    end_date = DateTime.parse(params['end'])
+    if params['start'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && params['end'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && end_date>=start_date
+      @transaction = Transaction.where(["created_at >= ? AND created_at <=?", start_date, end_date]).paginate(
+                                                           :page => params[:page],
+                                                           :per_page => 15).order('id DESC')
+    @new = Transaction.new()
+    @user = current_user
+    render 'index'
+    else
+      flash[:danger] = "Wrong date format"
+      redirect_to transactions_url
+    end
+  end
+
 
   private
   # Confirms a logged-in user.
@@ -81,5 +96,11 @@ class TransactionsController < ApplicationController
 
   def transaction_params
       params.require(:transaction).permit(:name, :price, :kind, :kind_id)
+  end
+
+  def validate_end_date_before_start_date
+    if end_date && start_date
+      errors.add(:end_date, "Put error text here") if end_date < start_date
+    end
   end
 end

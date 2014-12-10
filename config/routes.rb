@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   get 'recharge' => 'users#recharge'
   post 'recharge' => 'users#add_money'
+
+  get 'data-filter' => 'transactions#data_filer_show'
 end

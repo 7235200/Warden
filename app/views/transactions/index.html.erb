@@ -1,5 +1,7 @@
 <%= content_for :content do %>
     <h3>Transactions</h3>
+
+
     <%= render 'transactions/new' %>
 
     <%= will_paginate @transaction %>
@@ -31,6 +33,16 @@
       <% end %>
     </table>
     <%= will_paginate @transaction %>
+    <%= form_tag data_filter_path, :method => :get do %>
 
+        <ul class="nav nav-pills">
+        <li><i class="fa fa-calendar form-control"></i></li>
+        <li><%= text_field_tag 'start', 'Start date', class: "datepicker form-control" %></li>
+        <li><%= text_field_tag 'end', 'End date', class: "datepicker form-control" %></li>
+        <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
+        <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span>
+        </ul>
+
+    <% end %>
 
 <% end %>
