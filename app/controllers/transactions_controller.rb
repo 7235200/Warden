@@ -84,6 +84,19 @@ class TransactionsController < ApplicationController
     render 'index'
   end
 
+  def money_filter_show
+     arr=[]
+    if params[:price] == "0"
+      arr=[1000, 4000]
+    else
+      arr = params[:price].split(',')
+    end
+      @transaction = Transaction.where(["price >= ? AND price <=?", arr.first, arr.last]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
+      @new = Transaction.new()
+      @user = current_user
+      render 'index'
+  end
+
 
   private
   # Confirms a logged-in user.

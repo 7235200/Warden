@@ -4,6 +4,7 @@ gem 'rails',                '4.1.8'
 gem 'pg',             '0.17.1'
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
     :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'bootstrap-slider-rails'
 gem 'bcrypt',               '3.1.7'
 gem 'faker',                '1.4.2'
 gem 'will_paginate',           '3.0.7'

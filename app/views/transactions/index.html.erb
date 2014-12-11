@@ -34,6 +34,7 @@
     </table>
     <%= will_paginate @transaction %>
     <h3>Filters</h3>
+
     <%= form_tag data_filter_path, :method => :get do %>
         <ul class="nav nav-pills">
         <li><i class="fa fa-calendar form-control"></i></li>
@@ -42,8 +43,9 @@
         <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
        <% if current_page?(data_filter_path)  %> <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span><% end %>
         </ul>
-
     <% end %>
+
+
     <%= form_tag category_filter_path, :method => :get do %>
      <ul class="nav nav-pills">
          <li><i class="fa fa-bookmark form-control"></i> </li>
@@ -61,12 +63,28 @@
                </select>
                </li>
          <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
-         <% if current_page?(category_filter_path)  %>
-                   <span class="close">
-                    <%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %>
-                   </span>
-         <% end %>
+         <% if current_page?(category_filter_path)%><span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span><% end %>
     </ul>
     <% end %>
+
+     <%= form_tag money_filter_path, :method => :get do |f| %>
+           <ul class="nav nav-pills money-select">
+             <li><i class="fa fa-usd form-control"></i> </li>
+                 <li>
+                   <%= text_field_tag :price, nil, id: 'ex', type: 'text', class:'slider form-control', value:'0'
+
+                   %>
+                 </li>
+                 <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
+                       <% if current_page?(money_filter_path)  %>
+                       <span class="close">
+                       <%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %>
+                       </span>
+                        <% end %>
+                         </ul>
+                       <% end %>
+
+
+
 
 <% end %>

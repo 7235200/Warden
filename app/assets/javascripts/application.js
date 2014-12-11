@@ -12,12 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-slider
 //= require_tree .
 $(function() {
     $('.datepicker').datepicker({
         format: "dd/mm/yyyy"
+    });
+    $("#ex").slider({
+        min:10,
+        max:5000,
+        value:[1000,4000],
+        step:10
     });
 });
