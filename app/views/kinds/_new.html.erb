@@ -3,6 +3,10 @@
     <ul class="nav nav-pills">
     <li><%= f.label :name, class: 'form-control' %></li>
     <li><%= f.text_field :name, class: 'form-control' %></li>
+    <li><%= f.label "Is Require?", class:"form-control"%></li>
+    <li class="checkbox">
+      <%= f.check_box :isRequire%>
+    </li>
     <li><%= f.submit "Add category", class: "btn btn-primary" %></li>
     </ul>
 

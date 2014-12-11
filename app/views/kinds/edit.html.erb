@@ -1,8 +1,14 @@
 <%= content_for :content do %>
     <h3>Edit category</h3>
     <%= form_for(@kind) do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control' %>
-            <%= f.submit "Update category", class: "btn btn-primary" %>
-            <% end %>
-        <% end %>
+        <ul class="nav nav-pills">
+          <li><%= f.label :name, class: 'form-control' %></li>
+          <li><%= f.text_field :name, class: 'form-control' %></li>
+          <li><%= f.label "Is Require?", class:"form-control"%></li>
+                <li class="checkbox">
+                  <%= f.check_box :isRequire %>
+                </li>
+          <li><%= f.submit "Add category", class: "btn btn-primary" %></li>
+         </ul>
+     <% end %>
+<% end %>

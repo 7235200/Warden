@@ -4,8 +4,20 @@
     <li><%= f.label :name, class: 'form-control' %></li>
     <li><%= f.text_field :name, class: 'form-control' %></li>
     <li><%= f.label :price, class: 'form-control' %></li>
-     <li><%= f.text_field :price, class: 'form-control' %></li>
-        <li><%= f.select(:kind_id, Kind.where(:user_id => @user.id).collect {|p| [ p.name, p.id ] },{},{:class => 'form-control' })%></li>
+    <li><%= f.text_field :price, class: 'form-control' %></li>
+          <li>  <select class="form-control" id="transaction_kind_id" name="transaction[kind_id]">
+             <optgroup label="Required">
+             <%= Kind.where(:user_id => @user.id, :isRequire=>true).each do |kind|%>
+                 <option value= <%= kind.id  %>><%= kind.name %></option>
+             <% end %>
+             </optgroup>
+             <optgroup label="Not required">
+             <%= Kind.where(:user_id => @user.id, :isRequire=>false).each do |kind|%>
+                 <option value= <%= kind.id  %>><%= kind.name %></option>
+             <% end %>
+             </optgroup>
+           </select>
+           </li>
     <li><%= f.submit "Add", class: "btn btn-primary" %></li>
     </ul>
 

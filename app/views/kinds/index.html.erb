@@ -4,6 +4,7 @@
     <table class="table">
       <tr>
         <th>Name</th>
+        <th>Is require?</th>
         <th>Created_add</th>
         <th></th>
       </tr>
@@ -12,6 +13,7 @@
 
           <tr>
             <td><%= kind.name %></td>
+            <td><%= kind.isRequire %></td>
             <td><%= kind.created_at %></td>
             <td><%= link_to "edit", edit_kind_path(kind) %></td>
             <td><%= link_to "delete", kind, method: :delete,

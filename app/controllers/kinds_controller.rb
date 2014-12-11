@@ -6,7 +6,7 @@ class KindsController < ApplicationController
 
   def create
     @user = current_user
-    @kind = Kind.new(:name=>params[:kind][:name], :user_id=>@user.id)
+    @kind = Kind.new(:name=>params[:kind][:name], :user_id=>@user.id, :isRequire=>params[:kind][:isRequire])
     if @kind.save
       # Handle a successful save.
       flash[:success] = "New category added"
@@ -54,6 +54,6 @@ class KindsController < ApplicationController
     end
   end
     def kind_params
-      params.require(:kind).permit(:name)
+      params.require(:kind).permit(:name, :isRequire)
     end
 end

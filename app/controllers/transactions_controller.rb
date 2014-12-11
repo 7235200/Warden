@@ -62,9 +62,9 @@ class TransactionsController < ApplicationController
   end
 
   def data_filer_show
-    start_date = DateTime.parse(params['start'])
-    end_date = DateTime.parse(params['end'])
-    if params['start'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && params['end'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && end_date>=start_date
+    if params['start'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && params['end'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && DateTime.parse(params['end'])>=DateTime.parse(params['start'])
+      start_date = DateTime.parse(params['start'])
+      end_date = DateTime.parse(params['end'])
       @transaction = Transaction.where(["created_at >= ? AND created_at <=?", start_date, end_date]).paginate(
                                                            :page => params[:page],
                                                            :per_page => 15).order('id DESC')

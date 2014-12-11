@@ -40,7 +40,7 @@
         <li><%= text_field_tag 'start', 'Start date', class: "datepicker form-control" %></li>
         <li><%= text_field_tag 'end', 'End date', class: "datepicker form-control" %></li>
         <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
-        <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span>
+       <% if !current_page?(transactions_path)  %> <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span><% end %>
         </ul>
 
     <% end %>
