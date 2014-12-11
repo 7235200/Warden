@@ -77,6 +77,13 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def category_filter_show
+    @transaction = Transaction.where(:kind_id => params[:transaction][:kind_id]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
+    @new = Transaction.new()
+    @user = current_user
+    render 'index'
+  end
+
 
   private
   # Confirms a logged-in user.

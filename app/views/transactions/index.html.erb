@@ -33,16 +33,40 @@
       <% end %>
     </table>
     <%= will_paginate @transaction %>
+    <h3>Filters</h3>
     <%= form_tag data_filter_path, :method => :get do %>
-
         <ul class="nav nav-pills">
         <li><i class="fa fa-calendar form-control"></i></li>
         <li><%= text_field_tag 'start', 'Start date', class: "datepicker form-control" %></li>
         <li><%= text_field_tag 'end', 'End date', class: "datepicker form-control" %></li>
         <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
-       <% if !current_page?(transactions_path)  %> <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span><% end %>
+       <% if current_page?(data_filter_path)  %> <span class="close"><%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %></span><% end %>
         </ul>
 
+    <% end %>
+    <%= form_tag category_filter_path, :method => :get do %>
+     <ul class="nav nav-pills">
+         <li><i class="fa fa-bookmark form-control"></i> </li>
+               <li>  <select class="form-control" id="transaction_kind_id" name="transaction[kind_id]">
+                 <optgroup label="Required">
+                   <%= Kind.where(:user_id => @user.id, :isRequire=>true).each do |kind|%>
+                       <option value= <%= kind.id  %>><%= kind.name %></option>
+                   <% end %>
+                 </optgroup>
+                 <optgroup label="Not required">
+                   <%= Kind.where(:user_id => @user.id, :isRequire=>false).each do |kind|%>
+                       <option value= <%= kind.id  %>><%= kind.name %></option>
+                   <% end %>
+                 </optgroup>
+               </select>
+               </li>
+         <li><%= submit_tag 'Select', class: "btn btn-primary form-control" %></li>
+         <% if current_page?(category_filter_path)  %>
+                   <span class="close">
+                    <%= link_to "<i class='fa fa-times'></i>".html_safe, transactions_url, class:"" %>
+                   </span>
+         <% end %>
+    </ul>
     <% end %>
 
 <% end %>

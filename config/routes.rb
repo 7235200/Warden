@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   post 'recharge' => 'users#add_money'
 
   get 'data-filter' => 'transactions#data_filer_show'
+
+  get 'category-filter' => 'transactions#category_filter_show'
 end
