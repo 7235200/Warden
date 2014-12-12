@@ -1,0 +1,28 @@
+<%= content_for :content do %>
+
+<%= javascript_include_tag "http://code.highcharts.com/highcharts.js", "chartkick" %>
+
+    <h3>Charts</h3>
+    <p>
+    <%= link_to "All time", :controller => :charts, :action => :index  %> /
+    <%= link_to "3 month", three_month_path  %> /
+    <%= link_to "Month", month_path  %> /
+    <%= link_to "Today", today_path  %>
+    </p>
+
+
+    <h4>Transaction</h4>
+    <% if @transaction %>
+    <%= column_chart @transaction.group(:name).average(:price) %>
+    <% else %>
+        <P>NO DATA</P>
+    <% end  %>
+    <h4>Transaction by data</h4>
+    <%= line_chart @transaction.group(:kind_name).group_by_hour(:created_at).average(:price) %>
+    <h4>Category</h4>
+    <%= pie_chart @transaction.group(:kind_name).average(:price) %>
+
+
+
+
+<% end %>

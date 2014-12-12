@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root             'static_pages#home'
+
   get 'signup'  => 'users#new'
+
   resources :users
   resources :kinds
   resources :transactions
@@ -15,4 +17,10 @@ Rails.application.routes.draw do
   get 'data-filter' => 'transactions#data_filer_show'
   get 'category-filter' => 'transactions#category_filter_show'
   get 'money-filter' => 'transactions#money_filter_show'
+
+  get 'chart' => 'charts#index'
+  get 'three_month' => 'charts#three_month'
+  get 'month' => 'charts#month'
+  get 'today' => 'charts#today'
+
 end

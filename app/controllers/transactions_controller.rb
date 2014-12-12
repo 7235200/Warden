@@ -14,8 +14,11 @@ class TransactionsController < ApplicationController
   def create
     @user = current_user
     @was = @user.balance
+    @kind_id = params[:transaction][:kind_id]
+    @kind_name = Kind.find(@kind_id).name
     @transaction = Transaction.new(:name=>params[:transaction][:name], :price=>params[:transaction][:price],
-                                   :kind_id=>params[:transaction][:kind_id], :user_id=>@user.id)
+                                   :kind_id=>params[:transaction][:kind_id], :user_id=>@user.id,
+     :kind_name=>@kind_name)
 
     if @was>params[:transaction][:price].to_f
         if @transaction.save
@@ -36,13 +39,18 @@ class TransactionsController < ApplicationController
     @user = current_user
     @transaction = Transaction.find(params[:id])
   end
+
   def update
     @user = current_user
     @balance_was = @user.balance
     @transaction = Transaction.find(params[:id])
     @transaction_price_was = @transaction.price
+    @kind_id = params[:transaction][:kind_id]
+    @kind_name = Kind.find(@kind_id).name
+
     if @transaction.update_attributes(transaction_params)
       @user.update_attributes(balance: @balance_was + @transaction_price_was - params[:transaction][:price].to_f )
+      @transaction.update_attributes(:kind_name=>@kind_name)
       # Handle a successful update.
       flash[:success] = "Transaction updated"
       redirect_to transactions_url
@@ -62,15 +70,15 @@ class TransactionsController < ApplicationController
   end
 
   def data_filer_show
+    @user = current_user
+    @new = Transaction.new()
     if params['start'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && params['end'] =~ /[0-3]{1}[0-9]{1}\/[0-1]{1}[0-9]{1}\/[1-2]{1}[0-9]{3}/ && DateTime.parse(params['end'])>=DateTime.parse(params['start'])
       start_date = DateTime.parse(params['start'])
       end_date = DateTime.parse(params['end'])
-      @transaction = Transaction.where(["created_at >= ? AND created_at <=?", start_date, end_date]).paginate(
+      @transaction = Transaction.where(["created_at >= ? AND created_at <=? AND user_id =?", start_date, end_date, @user.id]).paginate(
                                                            :page => params[:page],
                                                            :per_page => 15).order('id DESC')
-    @new = Transaction.new()
-    @user = current_user
-    render 'index'
+      render 'index'
     else
       flash[:danger] = "Wrong date format"
       redirect_to transactions_url
@@ -78,9 +86,9 @@ class TransactionsController < ApplicationController
   end
 
   def category_filter_show
-    @transaction = Transaction.where(:kind_id => params[:transaction][:kind_id]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
     @new = Transaction.new()
     @user = current_user
+    @transaction = Transaction.where(["kind_id = ? AND user_id =?", params[:transaction][:kind_id], @user.id]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
     render 'index'
   end
 
@@ -91,9 +99,9 @@ class TransactionsController < ApplicationController
     else
       arr = params[:price].split(',')
     end
-      @transaction = Transaction.where(["price >= ? AND price <=?", arr.first, arr.last]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
-      @new = Transaction.new()
-      @user = current_user
+     @new = Transaction.new()
+     @user = current_user
+      @transaction = Transaction.where(["price >= ? AND price <=? AND user_id =?", arr.first, arr.last, @user.id]).paginate(:page => params[:page], :per_page => 15).order('id DESC')
       render 'index'
   end
 
