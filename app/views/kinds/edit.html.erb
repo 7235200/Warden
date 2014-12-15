@@ -1,6 +1,7 @@
 <%= content_for :content do %>
     <h3>Edit category</h3>
     <%= form_for(@kind) do |f| %>
+        <%= render 'shared/kinds_error_messages' %>
         <ul class="nav nav-pills">
           <li><%= f.label :name, class: 'form-control' %></li>
           <li><%= f.text_field :name, class: 'form-control' %></li>
@@ -8,7 +9,7 @@
                 <li class="checkbox">
                   <%= f.check_box :isRequire %>
                 </li>
-          <li><%= f.submit "Add category", class: "btn btn-primary" %></li>
+          <li><%= f.submit "Update", class: "btn btn-primary" %></li>
          </ul>
      <% end %>
 <% end %>

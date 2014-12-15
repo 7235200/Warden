@@ -78,9 +78,9 @@ input {
 }
 
 #error_explanation {
-  color: red;
+  color: #e6e6e6;
   ul {
-    color: red;
+    color: #a04332;
     margin: 0 0 30px 0;
   }
 }
@@ -142,9 +142,14 @@ input {
 .container{
   background-color:$white;
   padding:1.5rem;
+  border-radius:6px;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  -khtml-border-radius:6px;
 }
 h3 {
   padding:0 0 2rem;
+  margin-top:0.6rem;
 }
 .menu {
 //  background-color: rgba(94, 141, 159, 0.03);
@@ -154,7 +159,7 @@ h3 {
   padding:1rem;
 }
 .content{
-  padding:1rem 5rem;
+  padding:0 3rem 0 1rem;
 }
 .recharge{
   list-style-type:none;
@@ -166,7 +171,7 @@ h3 {
   padding:0;
 }
 .gravatar_edit{
-  padding:2rem 0;
+  padding:0 0 2rem;
 }
 .pagination{
   padding:0rem;
@@ -216,5 +221,17 @@ select {
 }
 .money-select{
   padding:1.3rem 0
+}
+
+.header{
+  position:relative;
+  text-align: center;
+  width:10rem;
+  left:50%;
+  margin-left:-15rem;
+  padding:0 1rem;
+  h1{
+    font-size: 5rem;
+  }
 }
 

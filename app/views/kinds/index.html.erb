@@ -8,10 +8,8 @@
         <th>Created_add</th>
         <th></th>
       </tr>
-
       <% @kind.each do |kind| %>
-
-          <tr>
+           <tr>
             <td><%= kind.name %></td>
             <td><%= kind.isRequire %></td>
             <td><%= kind.created_at %></td>
@@ -19,7 +17,6 @@
             <td><%= link_to "delete", kind, method: :delete,
                     data: { confirm: "You sure?" } %></td>
           </tr>
-
       <% end %>
     </table>
 <% end %>

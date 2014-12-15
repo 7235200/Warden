@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
       # redirect_to @user
-      redirect_to transactions_path
+      redirect_to kinds_path
     else
       render 'new'
     end

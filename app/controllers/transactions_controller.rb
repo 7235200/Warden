@@ -6,10 +6,33 @@ class TransactionsController < ApplicationController
   end
 
   def index
+    @require_kinds_names = []
+    @kinds_names_from_transactions = []
+    @foo = []
     @user = current_user
     @new = Transaction.new()
     @transaction = Transaction.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 15).order('id DESC')
-  end
+
+    @transaction_remaining = @transaction.where(["created_at >= ?", 1.month.ago])
+
+    @arr = Kind.where(:user_id=>@user.id)
+    @require_kinds = @arr.where(:isRequire => true)
+
+    @require_kinds.each do |f|
+      @require_kinds_names << f.name
+    end
+
+    @transaction_remaining.each do |f|
+    @kinds_names_from_transactions << f.kind_name
+    end
+
+    @require_kinds_names.each do |name|
+      if !@kinds_names_from_transactions.include?(name)
+        @foo << name
+      end
+    end
+   end
+
 
   def create
     @user = current_user
@@ -24,7 +47,7 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.update_attributes(balance: @was - params[:transaction][:price].to_f)
           # Handle a successful save.
-          flash[:success] = "New category added"
+          flash[:success] = "New transaction added"
           redirect_to transactions_url
         else
           render 'new'

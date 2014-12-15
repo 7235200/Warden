@@ -13,7 +13,9 @@
 
 
 
-<% if logged_in? %><div class="container"><% end %>
+<% if logged_in? %>
+  <%= render 'layouts/header' %>
+  <div class="container"><% end %>
   <% flash.each do |message_type, message| %>
       <div class="message alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
@@ -23,7 +25,8 @@
       <div class="col-md-2">
         <%= render 'layouts/menu' %>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8 content">
+        <%= render 'shared/error_messages' %>
         <%= yield(:content) %>
       </div>
       <div class="col-md-2">

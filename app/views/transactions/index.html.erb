@@ -1,8 +1,15 @@
 <%= content_for :content do %>
     <h3>Transactions</h3>
-
-
     <%= render 'transactions/new' %>
+    <% if current_page?(transactions_path) && @foo.any? %>
+    <p>
+    <h4>Require payments remaining in this month
+    <% @foo.each do |name| %>
+      <span class="label label-warning"> <%= name %></span>
+    <% end %>
+    </h4>
+    </p>
+    <% end %>
 
     <%= will_paginate @transaction %>
     <table class="table">
