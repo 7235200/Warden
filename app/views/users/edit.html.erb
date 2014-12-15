@@ -2,33 +2,37 @@
 <h3>Edit profile</h3>
 <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages' %>
+
+        <div class="col-md-4">
         <div class="gravatar_edit">
           <ul class="nav nav-pills">
           <li><%= gravatar_for @user %></li>
           <li><a href="http://gravatar.com/emails" target=_blank>Change avatar</a></li>
           </ul>
         </div>
+</div>
 
 
-
-
-        <ul class="nav nav-pills">
-       <li> <%= f.label :name, class: 'form-control'%></li>
+<div class="col-md-6">
+        <ul class="nav">
+        <%= f.label :name%>
           <li> <%= f.text_field :name, class: 'form-control' %></li>
 
-              <li><%= f.label :email, class: 'form-control' %></li>
+             <%= f.label :email%>
               <li><%= f.text_field :email, class: 'form-control' %></li>
-                    </ul>
-                    <ul class="nav nav-pills">
 
-                  <li><%= f.label :password, class: 'form-control' %></li>
+
+                  <%= f.label :password %>
                   <li><%= f.password_field :password, class: 'form-control' %></li>
 
-                      <li> <%= f.label :password_confirmation, class: 'form-control' %></li>
+                      <%= f.label :password_confirmation %>
                       <li> <%= f.password_field :password_confirmation, class: 'form-control' %></li>
                            </ul>
                             <ul class="nav nav-pills">
          <%= f.submit "Save changes", class: "btn btn-primary" %>
 </ul>
+
+    </div>
+
          <% end %>
 <% end %>
