@@ -1,0 +1,17 @@
+<%= content_for :content do %>
+    <h3>Edit purpose</h3>
+    <%= form_for(@purpose) do |f| %>
+        <%= render 'shared/purpose_error_messages' %>
+
+        <div class="col-md-5">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+              <%= f.label :money %>
+              <%= f.text_field :money, class: 'form-control' %>
+                  <%= f.label 'Start storage' %>
+                  <%= f.text_field :storage, class: 'form-control' %>
+                      <%= f.submit "Update", class: "btn btn-primary" %>
+                          </div>
+
+     <% end %>
+<% end %>

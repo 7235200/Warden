@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'purposes/index'
+
   root             'static_pages#home'
 
   get 'signup'  => 'users#new'
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :kinds
   resources :transactions
+  resources :purposes
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
@@ -13,6 +16,11 @@ Rails.application.routes.draw do
 
   get 'recharge' => 'users#recharge'
   post 'recharge' => 'users#add_money'
+
+  get 'purpose_recharge' => 'purposes#recharge'
+  post 'purpose_recharge' => 'purposes#add_money'
+
+
 
   get 'data-filter' => 'transactions#data_filer_show'
   get 'category-filter' => 'transactions#category_filter_show'
