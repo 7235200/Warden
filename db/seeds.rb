@@ -31,24 +31,6 @@ end
   isRequire: isRequire)
 end
 
-arr = ['Internet', 'Phone', 'Apartment', 'Food', 'Car', 'Games', 'Parties', 'Shopping', 'Gifts', 'Girlfriend', 'Boarding', 'Other']
-30.times do |n|
-  user_id = 1
-  kind_name = arr.sample
-  kind_id = Faker::Number.between(from = 1, to = 12)
-  name = Faker::Commerce.product_name
-  price = Faker::Commerce.price
-  created_at = Faker::Date.between(3.month.ago, Date.today)
-
-  Transaction.create!(user_id: user_id,
-      kind_id: kind_id,
-      kind_name: kind_name,
-      name:  name,
-      price: price,
-      created_at: created_at)
-end
-
-
 Purpose.create!(user_id: 1,
     name:  "Ipad air",
     money: 40000,
@@ -65,3 +47,20 @@ Purpose.create!(user_id: 1,
     name:  "Playstation 4",
     money: 21000,
     storage: 8000)
+
+arr = ['Internet', 'Phone', 'Apartment', 'Food', 'Car', 'Games', 'Parties', 'Shopping', 'Gifts', 'Girlfriend', 'Boarding', 'Other']
+30.times do |n|
+  user_id = 1
+  kind_name = arr.sample
+  kind_id = Faker::Number.between(from = 1, to = 12)
+  name = Faker::Commerce.product_name
+  price = Faker::Number.between(from = 1500, to = 40000)
+  created_at = Faker::Date.between(3.month.ago, Date.today)
+
+  Transaction.create!(user_id: user_id,
+      kind_id: kind_id,
+      kind_name: kind_name,
+      name:  name,
+      price: price,
+      created_at: created_at)
+end
