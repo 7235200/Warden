@@ -43,7 +43,7 @@ class PurposesController < ApplicationController
     @user = current_user
     @purpose = Purpose.find(params[:id])
     if params[:purpose][:storage].to_f <= params[:purpose][:money].to_f
-      if @purpose.storage + params[:purpose][:storage].to_f <= @user.balance
+      if params[:purpose][:storage].to_f <= @user.balance + @purpose.storage
         if  @user.update_attributes(balance: @user.balance + @purpose.storage - params[:purpose][:storage].to_f) && @purpose.update_attributes(purpose_params)
           # Handle a successful update.
           flash[:success] = "Category updated"
