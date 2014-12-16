@@ -14,20 +14,27 @@
             <%= link_to purpose.name, '#' %>
           </h4>
             <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped"
+              <% if purpose.money != purpose.storage %>
+              <div class="progress-bar progress-bar-warning progress-bar-striped"
               role="progressbar" aria-valuenow=<%= percent %>
                       aria-valuemin="0" aria-valuemax="100" style="width: <%= percent.to_s %>%">
-                <%= percent.to_s + '%' %> </div>
+                <%= percent.to_s + '%' %>
+              </div>
+              <% else %>
+                  <div class="progress-bar progress-bar-success progress-bar-striped"
+                       role="progressbar" aria-valuenow=<%= percent %>
+                          aria-valuemin="0" aria-valuemax="100" style="width: <%= percent.to_s %>%">
+                    <%= percent.to_s + '%' %>
+                  </div>
+              <% end %>
+
             </div>
 
 
 
-        <span class="purpose-recharge">
-           <ul class="nav nav-pills">
-             <% if purpose.money == purpose.storage %>
-                <li> <i class="fa fa-check"></i> &nbsp;</li>
-             <% end %>
 
+
+<div class="col-md-4 purpose">
           <% if purpose.money != purpose.storage %>
                 <%= form_for purpose, :url => purpose_recharge_path, :html => {:method => :post} do |f| %>
                 <ul class="nav nav-pills">
@@ -36,14 +43,21 @@
                     <li><%= f.submit "Add", class: "btn btn-primary" %></li>
                 </ul>
               <% end %>
+           <% else %>
+                <ul class="nav nav-pills">
+                     <li> <i class="fa fa-check"></i> &nbsp; Well done!</li>
+                </ul>
           <% end %>
+</div>
 
+<div class="col-md-7 purpose">
+         <ul class="nav nav-pills">
                 <li><span class="form-control"><%= purpose.storage %> of <%= purpose.money %> complete </span> </li>
                 <li><span class="form-control"><%= link_to "Edit", edit_purpose_path(purpose) %> </span> </li>
                 <li><span class="form-control"><%= link_to "Delete", purpose, method: :delete,
                                                    data: { confirm: "You sure?" } %></span></li>
           </ul>
-        </span>
+</div>
 
         <hr>
             <% end %>
