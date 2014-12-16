@@ -22,5 +22,10 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def login_test_user
+    user = User.find(1)
+    log_in user
+    redirect_to transactions_path
+  end
 
 end

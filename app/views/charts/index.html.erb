@@ -22,15 +22,14 @@
         <td> - <%= @transaction.sum(:price) %></td>
       </tr>
     </table>
-
+<hr>
     <h4>Transaction</h4>
-    <% if @transaction %>
-    <%= column_chart @transaction.group(:name).sum(:price) %>
-    <% else %>
-        <P>NO DATA</P>
-    <% end  %>
+    <%= bar_chart @transaction.group(:name).sum(:price) %>
+<hr>
+
     <h4>Transaction by data</h4>
     <%= area_chart @transaction.group(:kind_name).group_by_day(:created_at).sum(:price) %>
+<hr>
     <h4>Category</h4>
     <%= pie_chart @transaction.group(:kind_name).sum(:price) %>
 

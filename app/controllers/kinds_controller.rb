@@ -6,13 +6,18 @@ class KindsController < ApplicationController
 
   def create
     @user = current_user
-    @kind = Kind.new(:name=>params[:kind][:name], :user_id=>@user.id, :isRequire=>params[:kind][:isRequire])
-    if @kind.save
-      # Handle a successful save.
-      flash[:success] = "New category added"
-      redirect_to kinds_url
+    if @user.id != 1
+      @kind = Kind.new(:name=>params[:kind][:name], :user_id=>@user.id, :isRequire=>params[:kind][:isRequire])
+      if @kind.save
+        # Handle a successful save.
+        flash[:success] = "New category added"
+        redirect_to kinds_url
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to kinds_url
     end
   end
 
@@ -28,20 +33,31 @@ class KindsController < ApplicationController
   end
   def update
     @user = current_user
-    @kind = Kind.find(params[:id])
-    if @kind.update_attributes(kind_params)
-      # Handle a successful update.
-      flash[:success] = "Category updated"
-      redirect_to kinds_url
+    if @user.id != 1
+      @kind = Kind.find(params[:id])
+      if @kind.update_attributes(kind_params)
+        # Handle a successful update.
+        flash[:success] = "Category updated"
+        redirect_to kinds_url
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to kinds_url
     end
-  end
+end
 
   def destroy
+    @user = current_user
+    if @user.id != 1
     @kind = Kind.find(params[:id]).destroy
     flash[:success] = "Category deleted successfully"
     redirect_to kinds_url
+  else
+    flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+    redirect_to kinds_url
+  end
   end
 
   private

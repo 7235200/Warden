@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 20141215121034) do
 
   create_table "purposes", force: true do |t|
     t.string   "name"
+    t.string   "description"
     t.decimal  "money"
+    t.decimal  "storage"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "storage"
-    t.string   "description"
   end
 
   add_index "purposes", ["user_id"], name: "index_purposes_on_user_id", using: :btree

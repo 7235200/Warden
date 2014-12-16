@@ -12,25 +12,30 @@ class PurposesController < ApplicationController
 
   def create
     @user = current_user
-    @purpose = Purpose.new(:name => params[:purpose][:name], :storage => params[:purpose][:storage], :user_id => @user.id, :money => params[:purpose][:money])
-    if params[:purpose][:storage].to_f <= params[:purpose][:money].to_f
-      if params[:purpose][:storage].to_f <= @user.balance
-        if @purpose.save
-          @user.update_attributes(:balance => @user.balance - params[:purpose][:storage].to_f)
-          # Handle a successful save.
-          flash[:success] = "New purpose added"
-          redirect_to purposes_url
+    if @user.id != 1
+      @purpose = Purpose.new(:name => params[:purpose][:name], :storage => params[:purpose][:storage], :user_id => @user.id, :money => params[:purpose][:money])
+      if params[:purpose][:storage].to_f <= params[:purpose][:money].to_f
+        if params[:purpose][:storage].to_f <= @user.balance
+          if @purpose.save
+            @user.update_attributes(:balance => @user.balance - params[:purpose][:storage].to_f)
+            # Handle a successful save.
+            flash[:success] = "New purpose added"
+            redirect_to purposes_url
+          else
+            render 'new'
+          end
         else
-          render 'new'
+          flash[:danger] = "You don't wanna to have zero-balance, right?"
+          redirect_to purposes_url
         end
       else
-        flash[:danger] = "You don't wanna to have zero-balance, right?"
+        flash[:danger] = "Your storage can't be creater than declared purpose money"
         redirect_to purposes_url
       end
     else
-      flash[:danger] = "Your storage can't be creater than declared purpose money"
-      redirect_to purposes_url
-    end
+    flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+    redirect_to purposes_url
+  end
 
 
   end
@@ -41,24 +46,29 @@ class PurposesController < ApplicationController
 
   def update
     @user = current_user
-    @purpose = Purpose.find(params[:id])
-    if params[:purpose][:storage].to_f <= params[:purpose][:money].to_f
-      if params[:purpose][:storage].to_f <= @user.balance + @purpose.storage
-        if  @user.update_attributes(balance: @user.balance + @purpose.storage - params[:purpose][:storage].to_f) && @purpose.update_attributes(purpose_params)
-          # Handle a successful update.
-          flash[:success] = "Category updated"
-          redirect_to purposes_url
-        else
-          render 'edit'
-        end
+    if @user.id != 1
+        @purpose = Purpose.find(params[:id])
+        if params[:purpose][:storage].to_f <= params[:purpose][:money].to_f
+          if params[:purpose][:storage].to_f <= @user.balance + @purpose.storage
+            if  @user.update_attributes(balance: @user.balance + @purpose.storage - params[:purpose][:storage].to_f) && @purpose.update_attributes(purpose_params)
+              # Handle a successful update.
+              flash[:success] = "Category updated"
+              redirect_to purposes_url
+            else
+              render 'edit'
+            end
+          else
+            flash[:danger] = "You don't wanna to have zero-balance, right?"
+            redirect_to purposes_url
+          end
       else
-        flash[:danger] = "You don't wanna to have zero-balance, right?"
+        flash[:danger] = "Your storage can't be creater than declared purpose money"
         redirect_to purposes_url
       end
-  else
-    flash[:danger] = "Your storage can't be creater than declared purpose money"
-    redirect_to purposes_url
-  end
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to purposes_url
+    end
 end
 
 
@@ -69,6 +79,7 @@ end
 
   def add_money
     @user = current_user
+    if @user.id != 1
     @purpose = Purpose.find(params[:purpose][:id])
     was = @purpose.storage
     if params[:purpose][:storage].to_f + was <= @purpose.money
@@ -86,16 +97,25 @@ end
       flash[:danger] = "You don't wanna to have zero-balance, right?"
       redirect_to purposes_path
     end
+  else
+    flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+    redirect_to purposes_url
+  end
   end
 
   def destroy
     @purpose = Purpose.find(params[:id])
     user = current_user
-    was = user.balance
-    user.update_attributes(balance: was + @purpose.storage)
-    @purpose.destroy
-    flash[:success] = "Purpose deleted successfully"
-    redirect_to purposes_path
+    if user.id != 1
+      was = user.balance
+      user.update_attributes(balance: was + @purpose.storage)
+      @purpose.destroy
+      flash[:success] = "Purpose deleted successfully"
+      redirect_to purposes_path
+  else
+    flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+    redirect_to purposes_url
+  end
   end
 
 

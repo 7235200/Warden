@@ -30,12 +30,17 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    if @user.id != 1
     if @user.update_attributes(user_params)
       # Handle a successful update.
       flash[:success] = "Profile updated"
       redirect_to root_url
     else
       render 'edit'
+    end
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to transactions_url
     end
   end
 
@@ -46,6 +51,7 @@ class UsersController < ApplicationController
 
   def add_money
     @user = current_user
+    if @user.id != 1
     was = @user.balance
     if  @user.update_attributes(balance: params[:user][:balance])
         @user.update_attributes(balance: @user.balance + was)
@@ -54,6 +60,10 @@ class UsersController < ApplicationController
     else
         @user.balance = was
         render 'users/_recharge'
+    end
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to transactions_url
     end
   end
 
@@ -75,6 +85,10 @@ class UsersController < ApplicationController
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
+  def test_user
+    @user = User.find(:id=>1)
     redirect_to(root_url) unless current_user?(@user)
   end
 end

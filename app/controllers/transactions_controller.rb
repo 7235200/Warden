@@ -11,9 +11,10 @@ class TransactionsController < ApplicationController
     @foo = []
     @user = current_user
     @new = Transaction.new()
-    @transaction = Transaction.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 15).order('id DESC')
+    @transaction_before = Transaction.where(:user_id => @user.id)
+    @transaction = @transaction_before.paginate(:page => params[:page], :per_page => 15).order('id DESC')
 
-    @transaction_remaining = @transaction.where(["created_at >= ?", 1.month.ago])
+    @transaction_remaining = @transaction_before.where(["created_at >= ?", 1.month.ago])
 
     @arr = Kind.where(:user_id=>@user.id)
     @require_kinds = @arr.where(:isRequire => true)
@@ -36,6 +37,7 @@ class TransactionsController < ApplicationController
 
   def create
     @user = current_user
+    if @user.id != 1
     @was = @user.balance
     @kind_id = params[:transaction][:kind_id]
     @kind_name = Kind.find(@kind_id).name
@@ -56,6 +58,10 @@ class TransactionsController < ApplicationController
       flash[:danger] = "payment cant be higher than your balance"
       redirect_to transactions_url
     end
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to transactions_url
+    end
    end
 
   def edit
@@ -65,6 +71,7 @@ class TransactionsController < ApplicationController
 
   def update
     @user = current_user
+    if @user.id != 1
     @balance_was = @user.balance
     @transaction = Transaction.find(params[:id])
     @transaction_price_was = @transaction.price
@@ -80,16 +87,25 @@ class TransactionsController < ApplicationController
     else
       render 'edit'
     end
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to transactions_url
+    end
   end
 
   def destroy
     @transaction = Transaction.find(params[:id])
     user = current_user
+    if user.id != 1
     was = user.balance
     user.update_attributes(balance: was + @transaction.price)
     @transaction.destroy
     flash[:success] = "Transaction deleted successfully"
     redirect_to transactions_url
+    else
+      flash[:info] = "Are yor ready to sign up the Warden? Log out this awesome test user if you are!"
+      redirect_to transactions_url
+    end
   end
 
   def data_filer_show

@@ -15,11 +15,11 @@
 
 <% if logged_in? %>
   <%= render 'layouts/header' %>
-  <div class="container"><% end %>
+  <div class="container">
   <% flash.each do |message_type, message| %>
-      <div class="message alert alert-<%= message_type %>"><%= message %></div>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
-
+<% end %>
     <% if logged_in? %>
     <div class="row">
       <div class="col-md-2">
@@ -33,6 +33,9 @@
         <%= render 'users/recharge' %>
       </div>
   <% else %>
+    <% flash.each do |message_type, message| %>
+        <div class="message alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
   <%= yield %>
   <% end %>
 
