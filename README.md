@@ -11,5 +11,4 @@ Credits
 - PostgreSQL
 - Heroku production
 
-You can check it
-    <a href="money-warden.herokuapp.com">Here/</a>
+You can check it [here](money-warden.herokuapp.com).
