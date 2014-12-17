@@ -11,4 +11,5 @@ Credits
 - PostgreSQL
 - Heroku production
 
-You can check it [here](money-warden.herokuapp.com).
+You can check it [here][].
+[here]: http://money-warden.herokuapp.com
